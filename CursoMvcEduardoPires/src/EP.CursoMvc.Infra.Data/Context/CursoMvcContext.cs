@@ -1,5 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
 using EP.CursoMvc.Domain.Models;
 using EP.CursoMvc.Infra.Data.EntityConfig;
 
@@ -8,9 +10,11 @@ namespace EP.CursoMvc.Infra.Data.Context
     public class CursoMvcContext:DbContext
     {
         public CursoMvcContext()
-            //:base("DefaultConnection")
+            :base("DefaultConnection")
         {
-            
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.AutoDetectChangesEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Cliente> Clientes { get; set; }
@@ -32,6 +36,25 @@ namespace EP.CursoMvc.Infra.Data.Context
             modelBuilder.Configurations.Add(new EnderecoConfig());
 
             base.OnModelCreating(modelBuilder);
+        }
+
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries()
+                .Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null))
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property("DataCadastro").CurrentValue = DateTime.Now;
+                }
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("DataCadastro").IsModified = false;
+                }
+            }
+
+            return base.SaveChanges();
         }
     }
 }

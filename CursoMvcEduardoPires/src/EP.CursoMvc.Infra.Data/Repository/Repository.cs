@@ -36,12 +36,12 @@ namespace EP.CursoMvc.Infra.Data.Repository
             return obj;
         }
 
-        public TEntity ObterPorId(Guid id)
+        public virtual TEntity ObterPorId(Guid id)
         {
             return DbSet.Find(id);
         }
 
-        public IEnumerable<TEntity> ObterTodos()
+        public virtual IEnumerable<TEntity> ObterTodos()
         {
             return DbSet.ToList();
         }
@@ -51,7 +51,7 @@ namespace EP.CursoMvc.Infra.Data.Repository
             return DbSet.Skip(s).Take(t).ToList();
         }
 
-        public IEnumerable<TEntity> Buscar(Expression<Func<TEntity, bool>> predicate)
+        public virtual IEnumerable<TEntity> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
             return DbSet.Where(predicate);
         }
@@ -63,9 +63,9 @@ namespace EP.CursoMvc.Infra.Data.Repository
             SaveChanges();
         }
 
-        public int SaveChanges()
+        public virtual int SaveChanges()
         {
-            return SaveChanges();
+            return Db.SaveChanges();
         }
 
         public void Dispose()
