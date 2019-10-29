@@ -38,6 +38,7 @@ namespace EP.CursoMvc.Infra.Data.EntityConfig
                 .IsRequired();
             Property(c => c.Excluido)
                 .IsRequired();
+            Ignore(c => c.ValidationResult);
 
             ToTable("Clientes");
         }

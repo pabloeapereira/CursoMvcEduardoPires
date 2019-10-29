@@ -15,9 +15,9 @@ namespace EP.CursoMvc.UI.Site.Controllers
     {
         private readonly IClienteAppService _clienteAppService;
 
-        public ClientesController()
+        public ClientesController(IClienteAppService clienteAppService)
         {
-            _clienteAppService = new ClienteAppService();
+            _clienteAppService = clienteAppService;
         }
 
         [ClaimsAuthorize("Clientes","VI")]
@@ -51,13 +51,21 @@ namespace EP.CursoMvc.UI.Site.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ClienteEnderecoViewModel clienteEnderecoViewModel)
         {
-            if (ModelState.IsValid)
-            {
-                _clienteAppService.Adicionar(clienteEnderecoViewModel);
+            if (!ModelState.IsValid)
+                return View(clienteEnderecoViewModel);
+
+            clienteEnderecoViewModel = _clienteAppService.Adicionar(clienteEnderecoViewModel);
+            var result = clienteEnderecoViewModel.Cliente.ValidationResult;
+            if (result.IsValid)
                 return RedirectToAction("Index");
+
+            foreach (var erro in result.Erros)
+            {
+                ModelState.AddModelError(string.Empty, erro.Message);
             }
 
             return View(clienteEnderecoViewModel);
+
         }
 
         [ClaimsAuthorize("Clientes", "ED")]

@@ -1,0 +1,21 @@
+﻿@using EP.CursoMvc.UI.Site.Helpers
+@{
+    if (this.IfClaim("Clientes", "VI"))
+    {
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Produtos <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Adicionar Produto</a></li>
+                <li><a href="#">Realizar Pedido</a></li>
+                @{
+                    if (this.IfClaim("Clientes", "EX"))
+                    {
+                        <li><a href="#">Excluir Pedido</a></li>
+                    }
+                }
+                <li class="divider"></li>
+                <li><a href="#">Listar Todos</a></li>
+            </ul>
+        </li>
+    }
+}

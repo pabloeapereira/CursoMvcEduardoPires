@@ -4,11 +4,14 @@ using System.Linq;
 using Dapper;
 using EP.CursoMvc.Domain.Interfaces.Repository;
 using EP.CursoMvc.Domain.Models;
+using EP.CursoMvc.Infra.Data.Context;
 
 namespace EP.CursoMvc.Infra.Data.Repository
 {
     public class ClienteRepository : Repository<Cliente>, IClienteRepository
     {
+        public ClienteRepository(CursoMvcContext context) : base(context){}
+
         public Cliente ObterPorCpf(string cpf)
         {
             return Buscar(c => c.CPF == cpf).FirstOrDefault();
@@ -48,6 +51,12 @@ namespace EP.CursoMvc.Infra.Data.Repository
                     c.Enderecos.Add(e);
                     return c;
                 }, new {uid = id}).FirstOrDefault();
+        }
+
+        public override Cliente Adicionar(Cliente obj)
+        {
+            obj.DataCadastro = DateTime.Now;
+            return base.Adicionar(obj);
         }
     }
 }

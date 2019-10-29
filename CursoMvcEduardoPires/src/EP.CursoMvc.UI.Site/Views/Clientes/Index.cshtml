@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EP.CursoMvc.Application.ViewModels.ClienteViewModel>
+﻿@using EP.CursoMvc.UI.Site.Helpers
+@model IEnumerable<EP.CursoMvc.Application.ViewModels.ClienteViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -6,9 +7,14 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{
+    if (this.IfClaim("Clientes", "NV"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+}
 <table class="table">
     <tr>
         <th>
@@ -41,9 +47,9 @@
             @Html.DisplayFor(modelItem => item.DataNascimento)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            <a href="@Url.Action("Edit",new {id = item.Id})" class="btn btn-warning" @Html.Raw(this.IfClaimShow("Clientes","ED"))>Editar</a>
+            <a href="@Url.Action("Details",new {id = item.Id})" class="btn btn-primary" @Html.Raw(this.IfClaimShow("Clientes","DT"))>Detalhes</a>
+            <a href="@Url.Action("Delete",new {id = item.Id})" class="btn btn-danger" @Html.Raw(this.IfClaimShow("Clientes","EX"))>Excluir</a>
         </td>
     </tr>
 }

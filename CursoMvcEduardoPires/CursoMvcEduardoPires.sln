@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Infra", "5 - Infra", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 - Data", "5.1 - Data", "{CC4AA349-9EAB-41D6-B10D-1A3062963EF9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 - CrosCutting", "5.2 - CrosCutting", "{F836504A-8731-4FFF-9700-72C1EE092CAC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 - CrossCutting", "5.2 - CrossCutting", "{F836504A-8731-4FFF-9700-72C1EE092CAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP.CursoMvc.Domain", "src\EP.CursoMvc.Domain\EP.CursoMvc.Domain.csproj", "{07F88002-4C5E-45EA-A807-66D0BD121436}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP.CursoMvc.UI.Site", "src\EP.CursoMvc.UI.Site\EP.CursoMvc.UI.Site.csproj", "{2F308715-9D8F-4B12-85C9-1656AC6B4791}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP.CursoMvc.Infra.CrossCutting.MvcFilters", "src\EP.CursoMvc.Infra.CrossCutting.MvcFilters\EP.CursoMvc.Infra.CrossCutting.MvcFilters.csproj", "{F265D423-AAB4-46F4-A039-A037464AE955}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EP.CursoMvc.Infra.CrossCutting.IoC", "src\EP.CursoMvc.Infra.CrossCutting.IoC\EP.CursoMvc.Infra.CrossCutting.IoC.csproj", "{82B8C256-6D77-4E34-82EF-1E68FBC6189C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{F265D423-AAB4-46F4-A039-A037464AE955}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F265D423-AAB4-46F4-A039-A037464AE955}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F265D423-AAB4-46F4-A039-A037464AE955}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82B8C256-6D77-4E34-82EF-1E68FBC6189C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82B8C256-6D77-4E34-82EF-1E68FBC6189C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82B8C256-6D77-4E34-82EF-1E68FBC6189C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82B8C256-6D77-4E34-82EF-1E68FBC6189C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +71,7 @@ Global
 		{CAAE47A0-53FB-4123-95D9-012F08462D31} = {65A3DF9F-0B95-4B0E-A140-A5CB8921EA09}
 		{2F308715-9D8F-4B12-85C9-1656AC6B4791} = {F38AAF72-4AB5-4CE1-9D7D-D7DBB87CE85C}
 		{F265D423-AAB4-46F4-A039-A037464AE955} = {F836504A-8731-4FFF-9700-72C1EE092CAC}
+		{82B8C256-6D77-4E34-82EF-1E68FBC6189C} = {F836504A-8731-4FFF-9700-72C1EE092CAC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {40BBB111-DB7B-45AE-ACBC-9E371D62D930}

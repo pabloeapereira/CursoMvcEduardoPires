@@ -28,6 +28,8 @@ namespace EP.CursoMvc.Infra.Data.EntityConfig
                 .WithMany(c => c.Enderecos)
                 .HasForeignKey(e => e.ClienteId);
 
+            Ignore(c => c.ValidationResult);
+
             //HasOptional(e => e.Cliente)
             //    .WithMany(c => c.Enderecos)
             //    .HasForeignKey(e => e.ClienteId);

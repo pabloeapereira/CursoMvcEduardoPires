@@ -5,32 +5,42 @@ using EP.CursoMvc.Application.AutoMapper;
 using EP.CursoMvc.Application.Interfaces;
 using EP.CursoMvc.Application.ViewModels;
 using EP.CursoMvc.Domain.Interfaces.Repository;
+using EP.CursoMvc.Domain.Interfaces.Services;
 using EP.CursoMvc.Domain.Models;
-using EP.CursoMvc.Infra.Data.Repository;
+using EP.CursoMvc.Infra.Data.UoW;
 
 namespace EP.CursoMvc.Application.Services
 {
-    public class ClienteAppService:IClienteAppService
+    public class ClienteAppService:AppService, IClienteAppService
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly IClienteService _clienteService;
 
-        public ClienteAppService()
+        public ClienteAppService(IClienteRepository clienteRepository, IClienteService clienteService, IUnitOfWork uow)
+            : base(uow)
         {
-            _clienteRepository = new ClienteRepository();
+            _clienteRepository = clienteRepository;
+            _clienteService = clienteService;
         }
+
         public ClienteEnderecoViewModel Adicionar(ClienteEnderecoViewModel clienteEnderecoViewModel)
         {
             var cliente = AutoMapperSingleton.GetInstance().Map<Cliente>(clienteEnderecoViewModel.Cliente);
             var endereco = AutoMapperSingleton.GetInstance().Map<Endereco>(clienteEnderecoViewModel.Endereco);
             cliente.Enderecos.Add(endereco);
-            _clienteRepository.Adicionar(cliente);
+            var clienteReturn = _clienteService.Adicionar(cliente);
+
+            if(clienteReturn.ValidationResult.IsValid)
+                Commit();
+
+            clienteEnderecoViewModel.Cliente = AutoMapperSingleton.GetInstance().Map<ClienteViewModel>(clienteReturn);
             return clienteEnderecoViewModel;
         }
         public ClienteViewModel Atualizar(ClienteViewModel clienteViewModel)
         {
             var cliente = AutoMapperSingleton.GetInstance().Map<Cliente>(clienteViewModel);
 
-            _clienteRepository.Atualizar(cliente);
+            _clienteService.Atualizar(cliente);
             return clienteViewModel;
         }
 
@@ -68,12 +78,13 @@ namespace EP.CursoMvc.Application.Services
         
         public void Remover(Guid id)
         {
-            _clienteRepository.Remover(id);
+            _clienteService.Remover(id);
         }
 
         public void Dispose()
         {
             _clienteRepository.Dispose();
+            _clienteService.Dispose();
         }
     }
 }

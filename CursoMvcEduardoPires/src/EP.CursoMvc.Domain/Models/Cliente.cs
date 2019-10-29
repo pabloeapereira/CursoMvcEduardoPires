@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EP.CursoMvc.Domain.Validations.Clientes;
 
 namespace EP.CursoMvc.Domain.Models
 {
@@ -26,9 +27,17 @@ namespace EP.CursoMvc.Domain.Models
         }
 
         public virtual ICollection<Endereco> Enderecos { get; set; }
+
+        /*
+         * Validação Manual
+         * Extension Methods de validação
+         * Padrão Specification - DomainValidation
+         * FluentValidator
+         */
         public override bool EhValido()
         {
-            return true;
+            ValidationResult = new ClienteEstaConsistenteValidation().Validate(this);
+            return ValidationResult.IsValid;
         }
     }
 }
