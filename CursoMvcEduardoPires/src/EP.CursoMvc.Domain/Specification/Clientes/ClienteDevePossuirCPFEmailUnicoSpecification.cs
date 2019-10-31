@@ -16,7 +16,7 @@ namespace EP.CursoMvc.Domain.Specification.Clientes
 
         public bool IsSatisfiedBy(Cliente cliente)
         {
-            return _clienteRepository.Buscar(c => c.CPF == cliente.CPF || c.Email == cliente.Email).FirstOrDefault() == null;
+            return _clienteRepository.ObterClienteUnico(cliente) == null;
         }
     }
 }

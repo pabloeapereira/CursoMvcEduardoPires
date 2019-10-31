@@ -27,7 +27,12 @@ namespace EP.CursoMvc.Domain.Services
 
         public Cliente Atualizar(Cliente cliente)
         {
-            return _clienteRepository.Atualizar(cliente);
+            if (!cliente.EhValido())
+                return cliente;
+
+            //cliente.ValidationResult = new ClienteAptoParaCadastroValidation(_clienteRepository).Validate(cliente);
+
+            return  !cliente.ValidationResult.IsValid?cliente:_clienteRepository.Atualizar(cliente);
         }
 
         public void Remover(Guid id)

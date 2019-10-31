@@ -30,6 +30,11 @@ namespace EP.CursoMvc.Infra.Data.Repository
             return Db.Database.Connection.Query<Cliente>(sql);
         }
 
+        public Cliente ObterClienteUnico(Cliente cliente)
+        {
+            return Buscar(c => c.CPF == cliente.CPF || c.Email == cliente.Email).FirstOrDefault();
+        }
+
         public override void Remover(Guid id)
         {
             var cliente = ObterPorId(id);

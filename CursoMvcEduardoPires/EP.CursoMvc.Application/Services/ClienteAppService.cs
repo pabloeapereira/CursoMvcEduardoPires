@@ -40,7 +40,13 @@ namespace EP.CursoMvc.Application.Services
         {
             var cliente = AutoMapperSingleton.GetInstance().Map<Cliente>(clienteViewModel);
 
-            _clienteService.Atualizar(cliente);
+            var clienteReturn = _clienteService.Atualizar(cliente);
+
+            if (clienteReturn.ValidationResult.IsValid)
+                Commit();
+
+            clienteViewModel = AutoMapperSingleton.GetInstance().Map<ClienteViewModel>(clienteReturn);
+
             return clienteViewModel;
         }
 

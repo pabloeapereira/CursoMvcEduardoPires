@@ -12,5 +12,7 @@ namespace EP.CursoMvc.Domain.Interfaces.Repository
         Cliente ObterPorCpf(string cpf);
         Cliente ObterPorEmail(string email);
         IEnumerable<Cliente> ObterAtivos();
+
+        Cliente ObterClienteUnico(Cliente cliente);
     }
 }
